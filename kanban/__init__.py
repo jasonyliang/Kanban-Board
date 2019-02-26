@@ -7,4 +7,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 # has to put it down here to avoid circular importing
-from flaskblog import routes
+from kanban import routes
