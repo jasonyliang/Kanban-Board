@@ -1,4 +1,4 @@
-from flaskblog import db
+from kanban import db
 from datetime import datetime
 
 
