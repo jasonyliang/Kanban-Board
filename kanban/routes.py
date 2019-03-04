@@ -2,10 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from kanban import app
 from kanban.models import Todo
 import os
-
-@app.route("/")
-def home():
-	return render_template('home.html')
+from kanban.forms import ToDoForm
 
 
 @app.context_processor
@@ -20,3 +17,17 @@ def dated_url_for(endpoint, **values):
                                      endpoint, filename)
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
+
+
+@app.route("/")
+def home():
+	return render_template('home.html')
+
+
+@app.route("/add")
+def add_todo():
+	form = ToDoForm()
+	if form.validate_on_submit():
+		# todo = ToDoForm()
+		flash(f'Todo {form.title.data} created!', 'success')
+	return render_template('add.html', form=form, title="Add Todo")

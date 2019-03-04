@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <form method="post" action="/somewhereXD">
+        <h2>To-Do Submission</h1>
+        <p>
+            <label for="type"><span>Type:</span></label>
+        <select>
+            <option>To-Do</option>
+            <option>Doing</option>
+            <option>Done</option>
+          </select>
+        </p>
+        <p>
+            <label for="Title">Title:</label>
+            <input type='text' id="title" name="title" value="title"/>
+        </p>
+        <p><label for="Description">Description:</label></p>
+        <p>  
+            <textarea cols="30" rows="10" type='Description' id="Description" name="Description" value="Description"></textarea>
+        </p>
+        <p>
+            <label for="Deadline">Deadline:</label>
+            <input type="datetime-local" name="datetime" id="datetime" />
+        </p>
+        <button type="submit" class="Button">
+            <br><strong>submit</strong>
+        </button>
+        <button type="reset" class="Button">
+            <br><strong>reset</strong>
+        </button>
+    </form>
+
+</div>
+{% endblock %}
