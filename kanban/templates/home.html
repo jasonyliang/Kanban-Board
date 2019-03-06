@@ -1,29 +1,27 @@
 {% extends "base.html" %} {% block content %}
 <h1>This is home</h1>
-<div class="container-fluid">
-    <div class="row">
-    <div class="col-md-3 boxstyles">
-        <h3>To Do</h3>
-        <ul>
-            <li>To Do 1</li>
-            <li>To Do 2</li>
-            <li>To Do 3</li>
-        </ul>
-    </div>
-    <div class="col-md-3 boxstyles">
-        <h3>Doing</h3>
-        <ul>
-            <li>Doing 1</li>
-            <li>Doing 2</li>
-            <li>Doing 3</li>
-        </ul>
-    </div>
-    <div class="col-md-3 boxstyles">
-        <h3>Done</h3>
-        <ul>
-            <li>Done 1</li>
-        </ul>
+<div class="container">
+    <div class="row row-eq-height">
+        <div class="col-md-4 boxstyles">
+            <h3>To Do</h3>
+                
+            {% for todo in todos %}
+                <div class="row todo"><a href="#">{{ todo.title }}</a></div>
+            {% endfor %}
+               
+        </div>
+        <div class="col-md-4 boxstyles">
+            <h3>Doing</h3>
+            {% for do in dos %}
+                <div class="row todo"><a href="#">{{ do.title }}</a></div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4 boxstyles">
+            <h3>Done</h3>
+            {% for done in dones %}
+                <div class="row todo"><a href="#">{{ done.title }}</a></div>
+            {% endfor %}
+        </div>
     </div>
 </div>
-    </div>
 {% endblock content %}

@@ -1,8 +1,10 @@
 from flask import render_template, url_for, flash, redirect
-from kanban import app
+from kanban import app, db
 from kanban.models import Todo
 import os
 from kanban.forms import ToDoForm
+from sqlalchemy import and_, or_, not_
+
 
 
 @app.context_processor
@@ -19,16 +21,19 @@ def dated_url_for(endpoint, **values):
     return url_for(endpoint, **values)
 
 
-@app.route("/")
+@app.route("/", methods=['POST', 'GET'])
 def home():
-	return render_template('home.html')
+	todos = Todo.query.filter_by(do=False, done=False).all()
+	dos = Todo.query.filter_by(do=True, done=False).all()
+	dones = Todo.query.filter_by(do=True, done=True).all()
+	return render_template('home.html', todos=todos, dos=dos, dones=dones)
 
 
-@app.route("/add")
+@app.route("/add", methods=['POST', 'GET'])
 def add_todo():
 	form = ToDoForm()
 	if form.validate_on_submit():
-		todo = ToDoForm(title=form.title.data, description=form.description.data, deadline=form.deadline.data)
+		todo = Todo(title=form.title.data, description=form.description.data, deadline=form.deadline.data)
 		db.session.add(todo)
 		db.session.commit()
 		flash(f'Todo {form.title.data} created!', 'success')
