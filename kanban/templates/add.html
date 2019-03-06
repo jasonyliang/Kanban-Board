@@ -1,34 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-    <form method="post" action="/somewhereXD">
+<div class="content-section">
+    <form method="post" action="">
+    	{{ form.hidden_tag() }}
+    	<fieldset class="form-group">
         <h2>To-Do Submission</h1>
-        <p>
-            <label for="type"><span>Type:</span></label>
-        <select>
-            <option>To-Do</option>
-            <option>Doing</option>
-            <option>Done</option>
-          </select>
-        </p>
-        <p>
-            <label for="Title">Title:</label>
-            <input type='text' id="title" name="title" value="title"/>
-        </p>
-        <p><label for="Description">Description:</label></p>
-        <p>  
-            <textarea cols="30" rows="10" type='Description' id="Description" name="Description" value="Description"></textarea>
-        </p>
-        <p>
-            <label for="Deadline">Deadline:</label>
-            <input type="datetime-local" name="datetime" id="datetime" />
-        </p>
-        <button type="submit" class="Button">
-            <br><strong>submit</strong>
+        <div class="form-group">
+	        {{form.title.label(class="form-control-label")}}
+
+	        	{% if form.title.errors %}
+	        {{form.title(class="form-control form-control-lg is-invalid")}}
+	        <div class="invalid-feedback">
+	          {% for error in form.title.errors %}
+	          	<span>{{ error }}</span>
+	          {% endfor %}
+	        </div>
+	        {%else%}
+	        	{{form.title(class="form-control form-control-lg")}}
+	        {% endif %}
+      	</div>
+ 		<div class="form-group">
+	        {{form.description.label(class="form-control-label")}}
+
+	        	{% if form.description.errors %}
+	        {{form.description(class="form-control form-control-lg is-invalid")}}
+	        <div class="invalid-feedback">
+	          {% for error in form.description.errors %}
+	          	<span>{{ error }}</span>
+	          {% endfor %}
+	        </div>
+	        {%else%}
+	        	{{form.description(class="form-control form-control-lg")}}
+	        {% endif %}
+      	</div>
+      	<div class="form-group">
+	        {{form.deadline.label(class="form-control-label")}}
+
+	        	{% if form.deadline.errors %}
+	        {{form.deadline(class="form-control form-control-lg is-invalid")}}
+	        <div class="invalid-feedback">
+	          {% for error in form.deadline.errors %}
+	          	<span>{{ error }}</span>
+	          {% endfor %}
+	        </div>
+	        {%else%}
+	        	{{form.deadline(class="form-control form-control-lg")}}
+	        {% endif %}
+      	</div>
+
+        </fieldset>
+        <div class="form-group">
+      {{form.submit(class="btn btn-outline-info")}}
+    
+        <button type="reset" class="btn btn-outline-info">
+            <strong>Reset</strong>
         </button>
-        <button type="reset" class="Button">
-            <br><strong>reset</strong>
-        </button>
+        </div>
     </form>
 
 </div>

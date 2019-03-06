@@ -28,6 +28,9 @@ def home():
 def add_todo():
 	form = ToDoForm()
 	if form.validate_on_submit():
-		# todo = ToDoForm()
+		todo = ToDoForm(title=form.title.data, description=form.description.data, deadline=form.deadline.data)
+		db.session.add(todo)
+		db.session.commit()
 		flash(f'Todo {form.title.data} created!', 'success')
+		return redirect(url_for('home'))
 	return render_template('add.html', form=form, title="Add Todo")
