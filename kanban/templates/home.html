@@ -40,6 +40,7 @@
                     <div class="right-align">
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('todo', todo_id=done.id) }}">To Do</a>
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('do', todo_id=done.id) }}">Doing</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{{ url_for('delete', todo_id=done.id) }}">Delete</a>
                     </div>
                 </div>
             {% endfor %}

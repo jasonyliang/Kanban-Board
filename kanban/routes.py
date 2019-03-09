@@ -72,6 +72,14 @@ def items(todo_id):
 	todo = Todo.query.get_or_404(todo_id)
 	return render_template('items.html', todo=todo, title=f"Todo Item: {todo.title}")
 
+@app.route("/delete/<int:todo_id>")
+def delete(todo_id):
+	todo = Todo.query.get_or_404(todo_id)
+	db.session.delete(todo)
+	db.session.commit()
+	flash("Todo Deleted!", "danger")
+	return redirect(url_for('home'))
+
 
 
 
