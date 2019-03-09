@@ -7,7 +7,7 @@
                 
             {% for todo in todos %}
                 <div class="row todo">
-                    <a href="#">{{ todo.title }}</a>
+                    <a href="{{url_for('items', todo_id=todo.id)}}">{{ todo.title }}</a>
                     <div class="right-align">
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('do', todo_id=todo.id) }}">Doing</a>
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('done', todo_id=todo.id) }}">Done</a>
@@ -24,7 +24,7 @@
             <h3>Doing</h3>
             {% for do in dos %}
                 <div class="row todo">
-                    <a href="#">{{ do.title }}</a>
+                    <a href="{{url_for('items', todo_id=do.id)}}">{{ do.title }}</a>
                     <div class="right-align">
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('todo', todo_id=do.id) }}">To Do</a>
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('done', todo_id=do.id) }}">Done</a>
@@ -36,7 +36,7 @@
             <h3>Done</h3>
             {% for done in dones %}
                 <div class="row todo">
-                    <a href="#">{{ done.title }}</a>
+                    <a href="{{url_for('items', todo_id=done.id)}}">{{ done.title }}</a>
                     <div class="right-align">
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('todo', todo_id=done.id) }}">To Do</a>
                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('do', todo_id=done.id) }}">Doing</a>

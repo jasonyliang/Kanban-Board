@@ -67,7 +67,10 @@ def todo(todo_id):
 	flash(f"The Todo {todo.title} has been moved to 'ToDo'!", "success")
 	return redirect(url_for('home'))
 
-
+@app.route("/items/<int:todo_id>")
+def items(todo_id):
+	todo = Todo.query.get_or_404(todo_id)
+	return render_template('items.html', todo=todo, title=f"Todo Item: {todo.title}")
 
 
 
