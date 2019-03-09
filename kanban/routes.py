@@ -39,3 +39,36 @@ def add_todo():
 		flash(f'Todo {form.title.data} created!', 'success')
 		return redirect(url_for('home'))
 	return render_template('add.html', form=form, title="Add Todo")
+
+@app.route("/do/<int:todo_id>")
+def do(todo_id):
+	todo = Todo.query.get_or_404(todo_id)
+	todo.do = True
+	todo.done = False
+	db.session.commit()
+	flash(f"The Todo {todo.title} has been moved to 'Do'!", "success")
+	return redirect(url_for('home'))
+
+@app.route("/done/<int:todo_id>")
+def done(todo_id):
+	todo = Todo.query.get_or_404(todo_id)
+	todo.do = True
+	todo.done = True
+	db.session.commit()
+	flash(f"The Todo {todo.title} has been moved to 'Done'!", "success")
+	return redirect(url_for('home'))
+
+@app.route("/todo/<int:todo_id>")
+def todo(todo_id):
+	todo = Todo.query.get_or_404(todo_id)
+	todo.do = False
+	todo.done = False
+	db.session.commit()
+	flash(f"The Todo {todo.title} has been moved to 'ToDo'!", "success")
+	return redirect(url_for('home'))
+
+
+
+
+
+

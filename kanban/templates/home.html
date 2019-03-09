@@ -2,24 +2,46 @@
 <h1>This is home</h1>
 <div class="container">
     <div class="row row-eq-height">
-        <div class="col-md-4 boxstyles">
+        <div class="col-md-3 boxstyles">
             <h3>To Do</h3>
                 
             {% for todo in todos %}
-                <div class="row todo"><a href="#">{{ todo.title }}</a></div>
+                <div class="row todo">
+                    <a href="#">{{ todo.title }}</a>
+                    <div class="right-align">
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('do', todo_id=todo.id) }}">Doing</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('done', todo_id=todo.id) }}">Done</a>
+                    </div>
+                        
+                    
+                    
+                </div>
+
             {% endfor %}
                
         </div>
-        <div class="col-md-4 boxstyles">
+        <div class="col-md-3 boxstyles">
             <h3>Doing</h3>
             {% for do in dos %}
-                <div class="row todo"><a href="#">{{ do.title }}</a></div>
+                <div class="row todo">
+                    <a href="#">{{ do.title }}</a>
+                    <div class="right-align">
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('todo', todo_id=do.id) }}">To Do</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('done', todo_id=do.id) }}">Done</a>
+                    </div>
+                </div>
             {% endfor %}
         </div>
-        <div class="col-md-4 boxstyles">
+        <div class="col-md-3 boxstyles">
             <h3>Done</h3>
             {% for done in dones %}
-                <div class="row todo"><a href="#">{{ done.title }}</a></div>
+                <div class="row todo">
+                    <a href="#">{{ done.title }}</a>
+                    <div class="right-align">
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('todo', todo_id=done.id) }}">To Do</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('do', todo_id=done.id) }}">Doing</a>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>

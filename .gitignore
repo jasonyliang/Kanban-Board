@@ -127,3 +127,4 @@ dmypy.json
 
 #database
 /todo.db
+/kanban/site.db
