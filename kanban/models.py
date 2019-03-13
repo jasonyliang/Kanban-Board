@@ -12,7 +12,7 @@ class Todo(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)
     deadline = db.Column(db.DateTime, nullable=False)
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     def __repr__(self):
         return f"Todo('{self.title}', '{self.description}')"
 

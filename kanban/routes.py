@@ -1,8 +1,8 @@
 from flask import render_template, url_for, flash, redirect
-from kanban import app, db
-from kanban.models import Todo
+from kanban import app, db, bcrypt
+from kanban.models import Todo, User
 import os
-from kanban.forms import ToDoForm
+from kanban.forms import ToDoForm, RegistrationForm, LoginForm
 from sqlalchemy import and_, or_, not_
 
 
@@ -82,4 +82,17 @@ def delete(todo_id):
 
 
 
+# users 
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+	form = RegistrationForm()
+	if form.validate_on_submit():
+		# generate hashed password
+		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+		db.session.add(user)
+		db.session.commit()
+		flash(f'Account created for {form.username.data}!', 'success')
+		return redirect(url_for('home'))
+	return render_template('register.html', title="Register", form=form)
 
