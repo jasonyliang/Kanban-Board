@@ -14,3 +14,4 @@ class Todo(db.Model):
 
     def __repr__(self):
         return f"Todo('{self.title}', '{self.description}')"
+

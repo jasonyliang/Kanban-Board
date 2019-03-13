@@ -46,7 +46,7 @@ def do(todo_id):
 	todo.do = True
 	todo.done = False
 	db.session.commit()
-	flash(f"The Todo {todo.title} has been moved to 'Do'!", "success")
+	flash(f"The Todo '{todo.title}' has been moved to 'Do'!", "success")
 	return redirect(url_for('home'))
 
 @app.route("/done/<int:todo_id>")
@@ -55,7 +55,7 @@ def done(todo_id):
 	todo.do = True
 	todo.done = True
 	db.session.commit()
-	flash(f"The Todo {todo.title} has been moved to 'Done'!", "success")
+	flash(f"The Todo '{todo.title}' has been moved to 'Done'!", "success")
 	return redirect(url_for('home'))
 
 @app.route("/todo/<int:todo_id>")
@@ -64,7 +64,7 @@ def todo(todo_id):
 	todo.do = False
 	todo.done = False
 	db.session.commit()
-	flash(f"The Todo {todo.title} has been moved to 'ToDo'!", "success")
+	flash(f"The Todo '{todo.title}' has been moved to 'ToDo'!", "success")
 	return redirect(url_for('home'))
 
 @app.route("/items/<int:todo_id>")
@@ -77,7 +77,7 @@ def delete(todo_id):
 	todo = Todo.query.get_or_404(todo_id)
 	db.session.delete(todo)
 	db.session.commit()
-	flash("Todo Deleted!", "danger")
+	flash("Todo Removed!", "danger")
 	return redirect(url_for('home'))
 
 
