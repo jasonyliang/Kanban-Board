@@ -1,4 +1,4 @@
-from kanban import db
+from kanban import db, login_manager
 from datetime import datetime
 from flask_login import UserMixin
 
@@ -15,6 +15,10 @@ class Todo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     def __repr__(self):
         return f"Todo('{self.title}', '{self.description}')"
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

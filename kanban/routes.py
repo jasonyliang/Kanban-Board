@@ -1,10 +1,10 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from kanban import app, db, bcrypt
 from kanban.models import Todo, User
 import os
 from kanban.forms import ToDoForm, RegistrationForm, LoginForm
 from sqlalchemy import and_, or_, not_
-
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.context_processor
@@ -95,4 +95,21 @@ def register():
 		flash(f'Account created for {form.username.data}!', 'success')
 		return redirect(url_for('home'))
 	return render_template('register.html', title="Register", form=form)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
+	form = LoginForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			login_user(user, remember=form.remember.data)
+			next_page = request.args.get('next') #If the user was in a page before logging in
+			return redirect(next_page) if next_page else redirect(url_for('home'))
+		else:
+			flash(f'Login Failed. Please Try Again', 'danger')
+	return render_template('login.html', title="Login", form=form)
+
+
 
