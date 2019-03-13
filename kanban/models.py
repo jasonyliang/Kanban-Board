@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    todo = db.relationship('Todo', backref="creator", lazy=True)
+    todos = db.relationship('Todo', backref="creator", lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"

@@ -22,18 +22,20 @@ def dated_url_for(endpoint, **values):
 
 
 @app.route("/", methods=['POST', 'GET'])
+@login_required
 def home():
-	todos = Todo.query.filter_by(do=False, done=False).all()
-	dos = Todo.query.filter_by(do=True, done=False).all()
-	dones = Todo.query.filter_by(do=True, done=True).all()
+	todos = Todo.query.filter_by(do=False, done=False, user_id=current_user.id).all()
+	dos = Todo.query.filter_by(do=True, done=False, user_id=current_user.id).all()
+	dones = Todo.query.filter_by(do=True, done=True, user_id=current_user.id).all()
 	return render_template('home.html', todos=todos, dos=dos, dones=dones)
 
 
 @app.route("/add", methods=['POST', 'GET'])
+@login_required
 def add_todo():
 	form = ToDoForm()
 	if form.validate_on_submit():
-		todo = Todo(title=form.title.data, description=form.description.data, deadline=form.deadline.data)
+		todo = Todo(title=form.title.data, description=form.description.data, deadline=form.deadline.data, creator=current_user)
 		db.session.add(todo)
 		db.session.commit()
 		flash(f'Todo {form.title.data} created!', 'success')
