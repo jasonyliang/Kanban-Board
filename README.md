@@ -9,22 +9,29 @@ $ source venv/bin/activate
 
 ## Installing Dependencies
 To successfully run the application, dependencies are required, please run:
+
 ```bash
 $ pip3 install -r requirements.txt 
 ```
+
 ## Setting up a database:
 We use a sqlite database in this project, to set up the database, go to the terminal and enter:
+
 ```bash
 $ python3
 ```
+
 Once your on the python console, enter the following commands:
+
 ```bash
 $ from kanban import db
 $ db.session.drop_all()
 $ db.session.create_all()
 ```
+
 ## Running the application
 Once you installed everything necessary, go to the root directory of the project and run:
+
 ```bash
 $ python3 app.py
 ```
