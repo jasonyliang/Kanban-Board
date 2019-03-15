@@ -48,3 +48,28 @@ To run the unit tests, be sure to run the following command and the project dire
 $ cd kanban
 $ python3 -m unittest discover tests
 ```
+
+## Project Structure
+```bash
+Directory/Kanban-Board
+├── kanban/
+│   ├── __init__.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── models.py
+│   ├── templates/
+│   │   ├── add.html
+│   │   ├── base.html
+│   │   ├── home.html
+│   │   ├── items.html
+│   │   ├── login.html
+│   │   └── register.html
+│   ├── static/
+│   │   └── main.css
+│   └── tests
+│       ├── test_basic.py
+│       └── test_function.py
+├── requirements.txt
+├── run.py
+└── venv/
+```
