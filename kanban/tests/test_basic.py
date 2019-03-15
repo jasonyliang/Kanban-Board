@@ -9,16 +9,13 @@ topdir = os.path.join(os.path.dirname(__file__), "../..")
 sys.path.append(topdir)
 
 from kanban import app, db
+from kanban.models import Todo, User
  
  
 TEST_DB = 'test.db'
  
  
 class BasicTests(unittest.TestCase):
- 
-    ############################
-    #### setup and teardown ####
-    ############################
  
     # executed prior to each test
     def setUp(self):
@@ -34,7 +31,8 @@ class BasicTests(unittest.TestCase):
  
     # executed after each test
     def tearDown(self):
-        pass
+        db.session.remove()
+        db.drop_all()
     
     # user authentication methods
      
@@ -57,9 +55,9 @@ class BasicTests(unittest.TestCase):
             '/logout',
             follow_redirects=True
         )
- 
+
     #basic tests
-    # User authentication tests
+    # Standard Route tests
     def test_valid_user_registration(self):
         response = self.register('test', 'test@test.com', 'test1', 'test1')
         self.assertEqual(response.status_code, 200)
@@ -74,15 +72,12 @@ class BasicTests(unittest.TestCase):
 
     # page tests
     def test_main_page(self):
-        #response = self.register('test@test.com', 'test1', 'test')
-        #self.login('test@test.com', 'test1')
         response = self.app.get('/', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
     def test_add_todo_page(self):
         response = self.app.get('/add', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
- 
- 
+
 if __name__ == "__main__":
     unittest.main()
