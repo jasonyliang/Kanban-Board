@@ -1,6 +1,4 @@
 # kanban/test_basic.py
- 
- 
 import os
 import unittest
 

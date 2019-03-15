@@ -3,9 +3,15 @@ Flask Project for CS162
 
 ## Setting Up Virtual Environment
 ### Create a Virtual Environment
+
+```bash
 $ python3 -m virtualenv venv
+```
 To activate the virtual environment, run:
+
+```bash
 $ source venv/bin/activate
+```
 
 ## Installing Dependencies
 To successfully run the application, dependencies are required, please run:
@@ -36,3 +42,9 @@ Once you installed everything necessary, go to the root directory of the project
 $ python3 app.py
 ```
 
+## Testing 
+To run the unit tests, be sure to run the following command and the project directory:
+```bash
+$ cd kanban
+$ python3 -m unittest discover tests
+```
