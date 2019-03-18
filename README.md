@@ -44,12 +44,14 @@ $ python3 app.py
 
 ## Testing 
 To run the unit tests, be sure to run the following command and the project directory:
+
 ```bash
 $ cd kanban
 $ python3 -m unittest discover tests
 ```
 
 ## Project Structure
+
 ```bash
 Directory/Kanban-Board
 ├── kanban/
@@ -73,3 +75,6 @@ Directory/Kanban-Board
 ├── run.py
 └── venv/
 ```
+
+## Description of Application
+In the Simple Kanban Board, users are able to register for an account, log in, and enjoy the functionalities of a kanban board. Users can add a new todo item (including a deadline), which would by default be under the "Todo" table, and are able to move it to the other tables. When the item is completed (listed under "Done"), the user has the option to delete the item. At any point the user is also able to click on the items to inspect the descriptions of each todo item. Each user will only see the todo items created by themselves, as this is a very personalized application.
